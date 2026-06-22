@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Heart, Download, Bell, Folder, Receipt } from "lucide-react";
 import { api } from "../lib/api";
@@ -14,6 +14,11 @@ export default function UserDashboard() {
     api.get("/my/purchases").then((r) => setPurchases(r.data));
     api.get("/my/favorites").then((r) => setFavorites(r.data));
   }, []);
+
+  const purchasedAssets = useMemo(
+    () => purchases.map((p) => p.asset).filter(Boolean),
+    [purchases]
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10" data-testid="user-dashboard-page">
@@ -41,7 +46,7 @@ export default function UserDashboard() {
       </div>
 
       {tab === "purchases" && (
-        <Grid items={purchases.map((p) => p.asset).filter(Boolean)} empty="No purchases yet — explore the marketplace." />
+        <Grid items={purchasedAssets} empty="No purchases yet — explore the marketplace." />
       )}
       {tab === "favorites" && <Grid items={favorites} empty="No favorites yet." />}
       {tab === "invoices" && (
