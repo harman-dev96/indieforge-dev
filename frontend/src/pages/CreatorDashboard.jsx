@@ -16,7 +16,7 @@ export default function CreatorDashboard() {
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     title: "", description: "", category: "characters", price: 9, polygon_count: 5000,
-    art_style: "Realistic", engines: ["Unity"], formats: ["FBX"], thumbnail_url: "", tags: "",
+    art_style: "Realistic", engines: ["Unity"], formats: ["FBX"], thumbnail_url: "", preview_model_url: "", tags: "",
   });
 
   const load = () => {
@@ -32,6 +32,16 @@ export default function CreatorDashboard() {
       const { data } = await api.post("/upload", fd, { headers: { "Content-Type": "multipart/form-data" } });
       setForm((f) => ({ ...f, thumbnail_url: `${process.env.REACT_APP_BACKEND_URL}${data.url}` }));
       toast.success("Thumbnail uploaded");
+    } catch (err) { toast.error(formatApiError(err)); }
+  };
+
+  const onUploadModel = async (e) => {
+    const file = e.target.files?.[0]; if (!file) return;
+    const fd = new FormData(); fd.append("file", file); fd.append("kind", "model");
+    try {
+      const { data } = await api.post("/upload", fd, { headers: { "Content-Type": "multipart/form-data" } });
+      setForm((f) => ({ ...f, preview_model_url: `${process.env.REACT_APP_BACKEND_URL}${data.url}` }));
+      toast.success("3D model uploaded");
     } catch (err) { toast.error(formatApiError(err)); }
   };
 
@@ -159,6 +169,12 @@ export default function CreatorDashboard() {
               <input data-testid="upload-thumbnail" type="file" accept="image/*" onChange={onUploadThumb}
                 className="text-sm text-slate-300" />
               {form.thumbnail_url && <img src={form.thumbnail_url} alt="" className="mt-3 w-32 aspect-[4/3] object-cover rounded" />}
+            </Field>
+
+            <Field label="3D preview model (GLB/GLTF, optional)">
+              <input data-testid="upload-model" type="file" accept=".glb,.gltf" onChange={onUploadModel}
+                className="text-sm text-slate-300" />
+              {form.preview_model_url && <p className="text-xs text-teal-300 mt-2">Model ready · will load in viewer.</p>}
             </Field>
 
             <div className="flex justify-end gap-2 mt-6">

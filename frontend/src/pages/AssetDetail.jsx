@@ -46,7 +46,7 @@ export default function AssetDetail() {
       <div className="grid lg:grid-cols-[1.4fr_1fr] gap-8">
         <div>
           <div className="aspect-square rounded-md overflow-hidden glass relative">
-            <AssetViewer wireframe={wireframe} lighting={lighting} />
+            <AssetViewer wireframe={wireframe} lighting={lighting} modelUrl={asset.preview_model_url} />
             <div className="absolute top-3 left-3 flex gap-2">
               <button data-testid="viewer-wireframe-toggle" onClick={() => setWireframe((w) => !w)}
                 className={`chip ${wireframe ? "border-teal-400 text-teal-300" : ""}`}>Wireframe</button>

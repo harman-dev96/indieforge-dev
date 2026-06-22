@@ -20,6 +20,7 @@ import CreatorDashboard from "@/pages/CreatorDashboard";
 import Commission from "@/pages/Commission";
 import Community from "@/pages/Community";
 import Blog from "@/pages/Blog";
+import CreatorProfile from "@/pages/CreatorProfile";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/assets/:id" element={<AssetDetail />} />
+              <Route path="/creators/:id" element={<CreatorProfile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/pricing" element={<Pricing />} />

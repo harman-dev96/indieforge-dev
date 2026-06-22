@@ -470,7 +470,17 @@ async def creator_detail(creator_id: str):
         raise HTTPException(status_code=404, detail="Creator not found")
     portfolio_cur = db.assets.find({"creator_id": creator_id}, {"_id": 0})
     portfolio = [asset_to_dict(a) async for a in portfolio_cur]
-    return {**serialize_user(u), "portfolio": portfolio}
+    total_downloads = sum(a.get("downloads", 0) for a in portfolio)
+    total_likes = sum(a.get("likes", 0) for a in portfolio)
+    avg_rating = round(sum(a.get("rating", 0) for a in portfolio) / max(len(portfolio), 1), 2)
+    return {
+        **serialize_user(u),
+        "portfolio": portfolio,
+        "total_downloads": total_downloads,
+        "total_likes": total_likes,
+        "total_assets": len(portfolio),
+        "avg_asset_rating": avg_rating,
+    }
 
 
 # ---------------------------------------------------------------------------

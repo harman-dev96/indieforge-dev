@@ -111,18 +111,18 @@ export default function Home() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {creators.map((c) => (
             <div key={c.id} data-testid={`creator-card-${c.id}`} className="glass rounded-md p-5 hover:border-purple-500/50 transition-colors">
-              <div className="flex items-center gap-3">
+              <Link to={`/creators/${c.id}`} className="flex items-center gap-3">
                 <img src={c.avatar_url || `https://api.dicebear.com/7.x/identicon/svg?seed=${c.id}`}
                   alt={c.name} className="w-14 h-14 rounded-md object-cover border border-slate-700" />
                 <div>
-                  <div className="font-display font-semibold">{c.name}</div>
+                  <div className="font-display font-semibold hover:text-teal-300 transition-colors">{c.name}</div>
                   <div className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
                     <Star className="w-3 h-3 text-amber-400 fill-amber-400" />{c.rating?.toFixed?.(1)} · {c.followers} followers
                   </div>
                 </div>
-              </div>
+              </Link>
               <p className="text-sm text-slate-300 mt-3 line-clamp-2 min-h-[40px]">{c.bio}</p>
-              <Link to="/commission" className="btn-outline-teal w-full mt-4 h-9 text-sm">Hire</Link>
+              <Link to={`/creators/${c.id}`} className="btn-outline-teal w-full mt-4 h-9 text-sm">View profile</Link>
             </div>
           ))}
         </div>
