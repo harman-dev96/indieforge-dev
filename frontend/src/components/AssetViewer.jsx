@@ -49,7 +49,8 @@ function Loader() {
 export default function AssetViewer({ wireframe, lighting, modelUrl }) {
   const wrapRef = useRef(null);
   const [fs, setFs] = useState(false);
-  const color = lighting === "purple" ? "#7C3AED" : lighting === "teal" ? "#14B8A6" : "#F59E0B";
+  const lightingColors = { purple: "#7C3AED", teal: "#14B8A6", amber: "#F59E0B" };
+  const color = lightingColors[lighting] || lightingColors.purple;
 
   const toggleFullscreen = () => {
     if (!wrapRef.current) return;

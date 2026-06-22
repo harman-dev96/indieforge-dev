@@ -52,7 +52,11 @@ export default function Pricing() {
               </ul>
               <button data-testid={`select-plan-${p.id}`} onClick={() => subscribe(p.id)} disabled={loading === p.id}
                 className={`${p.highlight ? "btn-primary" : "btn-outline-teal"} w-full mt-7 h-11`}>
-                {loading === p.id ? "Redirecting…" : (p.id === "free" ? "Get started" : `Upgrade to ${p.name}`)}
+                {(() => {
+                  if (loading === p.id) return "Redirecting…";
+                  if (p.id === "free") return "Get started";
+                  return `Upgrade to ${p.name}`;
+                })()}
               </button>
             </div>
           );

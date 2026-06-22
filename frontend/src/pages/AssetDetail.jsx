@@ -128,7 +128,11 @@ export default function AssetDetail() {
             <button data-testid="buy-button" onClick={purchase} disabled={purchasing}
               className="btn-primary w-full mt-5 h-12 text-base">
               <ShoppingCart className="w-5 h-5" />
-              {purchasing ? "Redirecting…" : (asset.price > 0 ? "Buy now" : "Get free asset")}
+              {(() => {
+                if (purchasing) return "Redirecting…";
+                if (asset.price > 0) return "Buy now";
+                return "Get free asset";
+              })()}
             </button>
             <button data-testid="favorite-button" onClick={toggleFav} className="btn-outline-teal w-full mt-2 h-11 text-sm">
               <Heart className={`w-4 h-4 ${favorited ? "fill-teal-400" : ""}`} /> {favorited ? "Saved" : "Add to favorites"}
