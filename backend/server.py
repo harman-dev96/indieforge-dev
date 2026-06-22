@@ -527,12 +527,12 @@ async def upload_file(file: UploadFile = File(...), kind: str = Form("model"),
     file_id = str(uuid.uuid4())
     path = f"{APP_NAME}/uploads/{user['id']}/{file_id}.{ext}"
     data = await file.read()
+    result: Dict[str, Any] = {}
     try:
         result = put_object(path, data, file.content_type or "application/octet-stream")
     except Exception as e:
         logger.error(f"upload failed: {e}")
         raise HTTPException(500, "Upload failed")
-    backend_base = os.environ.get("PUBLIC_BACKEND_URL", "")
     public_url = f"/api/files/{result['path']}"
     await db.files.insert_one({
         "id": file_id,

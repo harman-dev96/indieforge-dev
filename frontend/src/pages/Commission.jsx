@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Briefcase, DollarSign, Calendar, MessageSquare } from "lucide-react";
 import { api, formatApiError } from "../lib/api";
 import { useAuth } from "../contexts/AuthContext";
@@ -13,8 +13,8 @@ export default function Commission() {
   const [form, setForm] = useState({ title: "", description: "", budget: 500, deadline_days: 30, category: "characters" });
   const [submitting, setSubmitting] = useState(false);
 
-  const load = () => api.get("/commissions").then((r) => setJobs(r.data));
-  useEffect(() => { load(); }, []);
+  const load = useCallback(() => api.get("/commissions").then((r) => setJobs(r.data)), []);
+  useEffect(() => { load(); }, [load]);
 
   const submit = async (e) => {
     e.preventDefault();

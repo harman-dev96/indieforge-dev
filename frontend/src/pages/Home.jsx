@@ -132,11 +132,11 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-3 gap-5">
           {[
-            { icon: Zap, t: "Instant preview", d: "Inspect every asset in our in-browser Three.js viewer before you pay." },
-            { icon: Shield, t: "Royalty-free", d: "Commercial license included. No surprise fees, ever." },
-            { icon: Sparkles, t: "Engine ready", d: "Unity, Unreal, Godot, Blender — all formats one click away." },
-          ].map(({ icon: Icon, t, d }, i) => (
-            <div key={i} className="glass rounded-md p-6">
+            { k: "instant",     icon: Zap, t: "Instant preview", d: "Inspect every asset in our in-browser Three.js viewer before you pay." },
+            { k: "royalty",     icon: Shield, t: "Royalty-free", d: "Commercial license included. No surprise fees, ever." },
+            { k: "engine-ready", icon: Sparkles, t: "Engine ready", d: "Unity, Unreal, Godot, Blender — all formats one click away." },
+          ].map(({ k, icon: Icon, t, d }) => (
+            <div key={k} className="glass rounded-md p-6">
               <Icon className="w-6 h-6 text-teal-400 mb-3" />
               <h3 className="font-display text-xl font-semibold">{t}</h3>
               <p className="text-slate-400 text-sm mt-2 leading-relaxed">{d}</p>

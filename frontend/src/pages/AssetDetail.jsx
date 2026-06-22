@@ -88,7 +88,7 @@ export default function AssetDetail() {
                     <div className="flex items-center gap-2">
                       <span className="font-medium">{r.user_name}</span>
                       <span className="flex items-center text-amber-400">
-                        {Array.from({ length: r.rating }).map((_, i) => <Star key={i} className="w-3 h-3 fill-amber-400" />)}
+                        {Array.from({ length: r.rating }).map((_, i) => <Star key={`star-${r.id}-${i}`} className="w-3 h-3 fill-amber-400" />)}
                       </span>
                     </div>
                     <p className="text-sm text-slate-300 mt-1">{r.comment}</p>

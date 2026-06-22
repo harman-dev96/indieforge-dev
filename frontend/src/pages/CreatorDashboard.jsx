@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { LineChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid, Bar, BarChart } from "recharts";
 import { Upload, DollarSign, Eye, Download, Plus } from "lucide-react";
 import { api, formatApiError } from "../lib/api";
@@ -19,11 +19,11 @@ export default function CreatorDashboard() {
     art_style: "Realistic", engines: ["Unity"], formats: ["FBX"], thumbnail_url: "", preview_model_url: "", tags: "",
   });
 
-  const load = () => {
+  const load = useCallback(() => {
     api.get("/my/assets").then((r) => setAssets(r.data));
     api.get("/my/analytics").then((r) => setAnalytics(r.data));
-  };
-  useEffect(() => { load(); }, []);
+  }, []);
+  useEffect(() => { load(); }, [load]);
 
   const onUploadThumb = async (e) => {
     const file = e.target.files?.[0]; if (!file) return;
