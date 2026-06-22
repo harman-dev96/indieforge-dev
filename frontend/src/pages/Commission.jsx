@@ -76,7 +76,7 @@ export default function Commission() {
               <button type="button" onClick={() => setOpen(false)} className="btn-outline-teal h-10">Cancel</button>
               <button data-testid="commission-submit" type="submit" disabled={submitting} className="btn-primary h-10">{submitting ? "Posting…" : "Post project"}</button>
             </div>
-            <style>{`.inp { @apply w-full h-10 px-3 rounded bg-slate-900 border border-slate-700 text-sm focus:outline-none focus:border-teal-500; } textarea.inp { @apply h-auto py-2; }`}</style>
+            <style>{`.inp { width:100%; height:40px; padding:0 12px; border-radius:6px; background:#0F172A; border:1px solid #334155; font-size:13px; color:#E2E8F0; } .inp:focus { outline:none; border-color:#14B8A6; } textarea.inp { height:auto; padding-top:8px; padding-bottom:8px; }`}</style>
           </form>
         </div>
       )}

@@ -40,7 +40,7 @@ export default function Navbar() {
         <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-md ml-auto relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
-            data-testid="navbar-search-input"
+            data-testid="nav-search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search assets, creators, tags…"

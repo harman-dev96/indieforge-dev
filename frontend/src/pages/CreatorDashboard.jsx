@@ -167,8 +167,9 @@ export default function CreatorDashboard() {
             </div>
 
             <style>{`
-              .inp { @apply w-full h-10 px-3 rounded bg-slate-900 border border-slate-700 text-sm focus:outline-none focus:border-teal-500; }
-              textarea.inp { @apply h-auto py-2; }
+              .inp { width:100%; height:40px; padding:0 12px; border-radius:6px; background:#0F172A; border:1px solid #334155; font-size:13px; color:#E2E8F0; }
+              .inp:focus { outline:none; border-color:#14B8A6; }
+              textarea.inp { height:auto; padding-top:8px; padding-bottom:8px; }
             `}</style>
           </form>
         </div>

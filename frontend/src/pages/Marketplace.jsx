@@ -125,10 +125,8 @@ export default function Marketplace() {
       </div>
 
       <style>{`
-        .input-styled { @apply w-full h-9 px-3 rounded bg-slate-900 border border-slate-700 text-sm; }
-        .input-styled:focus { outline:none; border-color:#14B8A6; }
-        .select-styled { @apply w-full h-9 px-3 rounded bg-slate-900 border border-slate-700 text-sm text-slate-200; }
-        .select-styled:focus { outline:none; border-color:#14B8A6; }
+        .input-styled, .select-styled { width:100%; height:36px; padding:0 12px; border-radius:6px; background:#0F172A; border:1px solid #334155; font-size:13px; color:#E2E8F0; }
+        .input-styled:focus, .select-styled:focus { outline:none; border-color:#14B8A6; }
       `}</style>
     </div>
   );
