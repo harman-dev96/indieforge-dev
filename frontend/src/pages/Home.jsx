@@ -18,10 +18,41 @@ export default function Home() {
   const [stats, setStats] = useState({ assets: 0, creators: 0, downloads: 0 });
 
   useEffect(() => {
-    api.get("/assets/trending").then((r) => setTrending(r.data));
-    api.get("/categories").then((r) => setCategories(r.data));
-    api.get("/creators/featured").then((r) => setCreators(r.data));
-    api.get("/stats").then((r) => setStats(r.data));
+   api.get("/assets/trending")
+    .then((r) => setTrending(Array.isArray(r.data) ? r.data : []))
+    .catch(() => setTrending([]));
+
+  api.get("/categories")
+    .then((r) => {
+      const data = Array.isArray(r.data)
+        ? r.data
+        : Array.isArray(r.data?.categories)
+        ? r.data.categories
+        : [];
+
+      setCategories(data);
+    })
+    .catch(() => setCategories([]));
+
+  api.get("/creators/featured")
+    .then((r) => setCreators(Array.isArray(r.data) ? r.data : []))
+    .catch(() => setCreators([]));
+
+  api.get("/stats")
+    .then((r) =>
+      setStats({
+        assets: r.data?.assets ?? 0,
+        creators: r.data?.creators ?? 0,
+        downloads: r.data?.downloads ?? 0,
+      })
+    )
+    .catch(() =>
+      setStats({
+        assets: 0,
+        creators: 0,
+        downloads: 0,
+      })
+    );
   }, []);
 
   return (
