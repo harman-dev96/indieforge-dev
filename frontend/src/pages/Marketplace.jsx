@@ -26,6 +26,7 @@ export default function Marketplace() {
 
   useEffect(() => { api.get("/categories").then((r) => setCategories(r.data)); }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setLoading(true);
     const q = {};
